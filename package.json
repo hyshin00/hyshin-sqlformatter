@@ -1,0 +1,120 @@
+{
+  "name": "hyshin-sqlformatter",
+  "displayName": "[G]SQL Formatter ",
+  "description": "",
+  "version": "0.0.2",
+  "publisher": "genone",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:sql"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "[G]SQL Formatter",
+      "properties": {
+        "sql-formatter.dialect": {
+          "scope": "resource",
+          "type": "string",
+          "enum": [
+            "sql",
+            "mariadb",
+            "mysql",
+            "postgresql",
+            "db2",
+            "plsql",
+            "n1ql",
+            "redshift",
+            "spark",
+            "tsql"
+          ],
+          "default": "sql",
+          "description": "Which dialect to format with (sql: Standard SQL)"
+        },
+        "sql-formatter.uppercase": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Convert keywords to uppercase"
+        },
+
+        "sql-formatter.indentStyle": {
+          "scope": "resource",
+          "type": "string",
+          "default": "standard",
+          "enum": ["standard" ,"tabularLeft","tabularRight"],
+          "description": "Switches between different indentation styles."
+        },
+
+        "sql-formatter.commaPosition": {
+          "scope": "resource",
+          "type": "string",
+          "default": "before",
+          "enum": ["before" ,"after","tabular"],
+          "description": "Defines where to place commas in lists of columns"
+        },
+
+        "sql-formatter.logicalOperatorNewline": {
+          "scope": "resource",
+          "type": "string",
+          "default": "before",
+          "enum": ["before" ,"after"],
+          "description": "Decides newline placement before or after logical operators (AND, OR, XOR)"
+        },
+
+        "sql-formatter.tabulateAlias": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Aligns column aliases into a single column. Does not effect table name aliases"
+        },
+
+        "sql-formatter.linesBetweenQueries": {
+          "scope": "resource",
+          "type": "number",
+          "minimum": 1,
+          "default": 2,
+          "description": "Change number of linebreaks between queries"
+        },
+
+        "sql-formatter.newlineBeforeSemicolon": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to place query separator (;) on a separate line"
+        },
+
+        "sql-formatter.paramTypes": {
+          "scope": "resource",
+          "type": "object",
+          "default": null,
+          "description": "Specifies parameter types to support when parsing SQL prepared statements."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.82.0",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "sql-formatter": "^13.0.0"
+  }
+}
